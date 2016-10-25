@@ -21423,8 +21423,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-
 	var io = __webpack_require__(173);
+	var Header = __webpack_require__(220);
 
 	var APP = React.createClass({
 		displayName: "APP",
@@ -21441,9 +21441,9 @@
 
 		render() {
 			return React.createElement(
-				"h1",
+				"div",
 				null,
-				" Hello I am from APPjs file "
+				React.createElement(Header, { title: "Hello Title" })
 			);
 		}
 	});
@@ -28904,6 +28904,37 @@
 	};
 
 
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+
+	var Header = React.createClass({
+		displayName: "Header",
+
+
+		propTypes: {
+			title: React.PropTypes.string.isRequired
+		},
+
+		render() {
+			return React.createElement(
+				"header",
+				null,
+				React.createElement(
+					"h1",
+					null,
+					" ",
+					this.props.title,
+					" "
+				)
+			);
+		}
+	});
+
+	module.exports = Header;
 
 /***/ }
 /******/ ]);
