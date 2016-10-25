@@ -5,20 +5,31 @@ var Header = require("./parts/Header")
 var APP = React.createClass({
 
 
+	getInitialState() {
+		return{
+			status: "disconnected"
+		}
+	},
+
 	componentWillMount() {
 		this.socket = io("http://localhost:3000");
 		this.socket.on("connect", this.connect)
+		this.socket.on("disconnect", this.disconnect)
 	},
 
 
 	connect() {
-		alert("Connected: " + this.socket.id)
+		this.setState({ status: "connected" });
+	},
+
+	disconnect() {
+		this.setState({ status: "disconnected" });
 	},
 
 	render() {
 		return (
 			<div>
-				<Header title="Hello Title"/>
+				<Header title="Hello Title" status={this.state.status}/>
 			</div>
 		);
 	}

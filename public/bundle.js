@@ -21430,20 +21430,31 @@
 		displayName: "APP",
 
 
+		getInitialState() {
+			return {
+				status: "disconnected"
+			};
+		},
+
 		componentWillMount() {
 			this.socket = io("http://localhost:3000");
 			this.socket.on("connect", this.connect);
+			this.socket.on("disconnect", this.disconnect);
 		},
 
 		connect() {
-			alert("Connected: " + this.socket.id);
+			this.setState({ status: "connected" });
+		},
+
+		disconnect() {
+			this.setState({ status: "disconnected" });
 		},
 
 		render() {
 			return React.createElement(
 				"div",
 				null,
-				React.createElement(Header, { title: "Hello Title" })
+				React.createElement(Header, { title: "Hello Title", status: this.state.status })
 			);
 		}
 	});
@@ -28928,6 +28939,8 @@
 					null,
 					" ",
 					this.props.title,
+					" ",
+					this.props.status,
 					" "
 				)
 			);
