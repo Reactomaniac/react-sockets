@@ -1,6 +1,7 @@
 var express = require("express");
 
 var connections = [];
+var title = 'Untitled Presentation';
 
 var app = express();
 
@@ -17,6 +18,10 @@ io.sockets.on("connection", function(socket){
 		connections.splice(connections.indexOf(socket), 1);
 		socket.disconnect();
 		console.log("Disconnected: %s remaining sockets", connections.length);
+	});
+
+	socket.emit("welcome", {
+		title: title
 	});
 
 	connections.push(socket);
