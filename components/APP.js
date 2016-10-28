@@ -39,7 +39,7 @@ var APP = React.createClass({
 		return (
 			<div>
 				<Header title={this.state.title} status={this.state.status}/>
-				<RouteHandler />
+				{this.props.children}
 			</div>
 		);
 	}

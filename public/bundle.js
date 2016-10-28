@@ -46,27 +46,26 @@
 
 	var React = __webpack_require__(1);
 	var ReactDom = __webpack_require__(34);
-	var Router = __webpack_require__(172);
-	var Route = Router.Route;
-	var DefaultRoute = __webpack_require__(172).DefaultRoute;
+	var Router = __webpack_require__(172).Router;
+	var Route = __webpack_require__(172).Route;
+	var IndexRoute = __webpack_require__(172).IndexRoute;
+	var hashHistory = __webpack_require__(172).hashHistory;
 
 	var APP = __webpack_require__(227);
 	var Audience = __webpack_require__(276);
 	var Speaker = __webpack_require__(277);
 	var Board = __webpack_require__(278);
 
-	var routes = React.createElement(
-		Route,
-		{ handler: APP },
-		React.createElement(Route, { path: "/", handler: Audience }),
-		React.createElement(Route, { name: "speaker", path: "speaker", handler: Speaker }),
-		React.createElement(Route, { name: "board", path: "board", handler: Board })
-	);
-
 	ReactDom.render(React.createElement(
-		Router,
-		null,
-		routes
+	    Router,
+	    { history: hashHistory },
+	    React.createElement(
+	        Route,
+	        { path: "/", component: APP },
+	        React.createElement(IndexRoute, { component: Audience }),
+	        React.createElement(Route, { name: "speaker", path: "speaker", component: Speaker }),
+	        React.createElement(Route, { name: "board", path: "board", component: Board })
+	    )
 	), document.getElementById('react-container'));
 
 /***/ },
@@ -26387,7 +26386,7 @@
 				"div",
 				null,
 				React.createElement(Header, { title: this.state.title, status: this.state.status }),
-				React.createElement(RouteHandler, null)
+				this.props.children
 			);
 		}
 	});
